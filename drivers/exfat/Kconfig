@@ -1,0 +1,15 @@
+config EXFAT
+	tristate "Extended File Allocation Table"
+        depends on NLS_UTF8
+	default n
+	---help---
+	  The exFat is a Microsoft filesystem optimized for flash
+          drives which can be used when the NTFS is not a feasible
+          solution. Unlike NTFS, exFAT cannot pre-allocate disk
+          space for afile by just marking arbitrary space on disk
+          as 'allocated'. As in FAT, when creating a file of known
+          length, exFAT must perform a complete physical write
+          equal to the size of the file.
+
+	  To compile this as a module, choose M here: the module will be called
+	  exFAT.
