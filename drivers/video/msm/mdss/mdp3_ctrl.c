@@ -524,9 +524,6 @@ static int mdp3_ctrl_off(struct msm_fb_data_type *mfd)
 	panel = mdp3_session->panel;
 	mutex_lock(&mdp3_session->lock);
 
-	if (panel && panel->set_backlight)
-		panel->set_backlight(panel, 0);
-
 	if (!mdp3_session->status) {
 		pr_debug("fb%d is off already", mfd->index);
 		goto off_error;
@@ -870,7 +867,7 @@ static int mdp3_ctrl_display_commit_kickoff(struct msm_fb_data_type *mfd,
 		mdp3_bufq_push(&mdp3_session->bufq_out, data);
 	}
 
-	if (mdp3_bufq_count(&mdp3_session->bufq_out) > 2) {
+	if (mdp3_bufq_count(&mdp3_session->bufq_out) > 1) {
 		data = mdp3_bufq_pop(&mdp3_session->bufq_out);
 		mdp3_put_img(data, MDP3_CLIENT_DMA_P);
 	}
